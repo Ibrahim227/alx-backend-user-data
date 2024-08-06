@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Import required Module/Lib"""
 from flask Import request
-from typing import List, TypeVar
+# from typing import List, TypeVar
 
 
 class Auth:
