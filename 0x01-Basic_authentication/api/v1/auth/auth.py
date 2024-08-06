@@ -16,7 +16,7 @@ class Auth:
 
         if excluded_paths is None or excluded_paths == []:
             return True
-        elif path in excluded_pahs:
+        if path in excluded_pahs:
             return False
         else:
             for i in excluded_paths:
