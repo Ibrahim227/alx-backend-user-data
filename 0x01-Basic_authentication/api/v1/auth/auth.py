@@ -17,7 +17,8 @@ class Auth:
         if excluded_paths is None or excluded_paths == []:
             return True
 
-        
+        if len(excluded_paths)[-1] == '/':
+            return False
 
     def authorization_header(self, request=None) -> str:
         """Authorization Header
