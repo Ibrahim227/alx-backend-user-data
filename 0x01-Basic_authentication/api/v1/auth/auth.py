@@ -11,12 +11,12 @@ class Auth:
         Returns:
           - False - path nd excluded_paths will be used late
         """
-        if path is None or path not in excluded_paths:
+        if path is None:
             return True
 
-        if excluded_paths is None or excluded_paths == []:
+        elif excluded_paths is None or excluded_paths == []:
             return True
-        if path in excluded_pahs:
+        elif path in excluded_paths:
             return False
         else:
             for i in excluded_paths:
