@@ -14,8 +14,7 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 AUTH_TYPE = os.getenv("AUTH_TYPE")
-
-if AUTH_TYPE == 'auth':
+if AUTH_TYPE == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
 elif AUTH_TYPE == "basic_auth":
@@ -40,11 +39,12 @@ def bef_req():
     if auth is None:
         pass
     else:
-        setattr(request, 'current_user', auth.current_user(request) 
+        setattr(request, "current_user", auth.current_user(request))
         excluded = [
             '/api/v1/status/',
             '/api/v1/unauthorized/',
-            '/api/v1/forbidden/'
+            '/api/v1/forbidden/',
+            '/api/v1/auth_session/login/'
         ]
         if auth.require_auth(request.path, excluded):
             cookie = auth.session_cookie(request)
@@ -63,13 +63,15 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-    """Unauthorized Handler"""
+    """ Request unauthorized handler
+    """
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
-    """Fobidden Handler"""
+    """ Request unauthorized handler
+    """
     return jsonify({"error": "Forbidden"}), 403
 
 
